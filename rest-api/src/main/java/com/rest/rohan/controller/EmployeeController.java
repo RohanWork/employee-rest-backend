@@ -10,14 +10,15 @@ import com.rest.rohan.mapper.entity.EmployeeEntity;
 import com.rest.rohan.response.EmployeeResponse;
 import com.rest.rohan.service.EmployeeService;
 
-@Controller
+@CrossOrigin(origins = "http://localhost:3000")
+@RestController
 @RequestMapping("/empmgn")
 public class EmployeeController {
 
 	@Autowired
 	EmployeeService employeeService;
 	
-	@GetMapping (value = "/employees", produces = "application/json; charset=UTF-8")
+	@GetMapping (value = "/getAllEmployees", produces = "application/json; charset=UTF-8")
 	public ResponseEntity<EmployeeResponse> getAllEmployees() throws Exception {
 		EmployeeResponse response = new EmployeeResponse(); 
 		response.setStatusCode(HttpStatus.OK.value()); 
@@ -26,7 +27,7 @@ public class EmployeeController {
 		return ResponseEntity.ok(response);
 	}
 	
-	@GetMapping (value = "/employees/{empid}", produces = "application/json; charset=UTF-8")
+	@GetMapping (value = "/getEmployee/{empid}", produces = "application/json; charset=UTF-8")
 	public ResponseEntity<EmployeeResponse> getEmployeeById(@PathVariable int empid) throws Exception{
 		EmployeeResponse response = new EmployeeResponse();
 		response.setStatusCode(HttpStatus.OK.value());
@@ -35,7 +36,7 @@ public class EmployeeController {
 		return ResponseEntity.ok(response);
 	}
 	
-	@PostMapping (value = "/employees", produces = "application/json; charset=UTF-8")
+	@PostMapping (value = "/createEmployee", produces = "application/json; charset=UTF-8")
 	public ResponseEntity<EmployeeResponse> createEmployee(@RequestBody EmployeeEntity request) throws Exception{
 		EmployeeResponse response = new EmployeeResponse();
 		response.setStatusCode(HttpStatus.OK.value());
@@ -45,7 +46,7 @@ public class EmployeeController {
 		return ResponseEntity.ok(response);
 	}
 
-	@GetMapping (value = "/employeesAudit/{empid}", produces = "application/json; charset=UTF-8")
+	@GetMapping (value = "/auditEmployee/{empid}", produces = "application/json; charset=UTF-8")
 	public ResponseEntity<EmployeeResponse> auditTable(@PathVariable int empid) throws Exception{
 		EmployeeResponse response = new EmployeeResponse();
 		response.setStatusCode(HttpStatus.OK.value());
@@ -54,8 +55,8 @@ public class EmployeeController {
 		return ResponseEntity.ok(response);
 	}
 
-	@PutMapping (value = "/employees", produces = "application/json; charset=UTF-8")
-	public ResponseEntity<EmployeeResponse> deleteEmployee(@RequestBody EmployeeEntity employeeEntity) throws Exception{
+	@PutMapping (value = "/updateEmployee", produces = "application/json; charset=UTF-8")
+	public ResponseEntity<EmployeeResponse> updateEmployee(@RequestBody EmployeeEntity employeeEntity) throws Exception{
 		EmployeeResponse response = new EmployeeResponse();
 		response.setStatusCode(HttpStatus.OK.value());
 		response.setStatusMessage("Success");
@@ -63,7 +64,7 @@ public class EmployeeController {
 		return ResponseEntity.ok(response);
 	}
 
-	@GetMapping (value = "/employeeDelete/{empid}", produces = "application/json; charset=UTF-8")
+	@GetMapping (value = "/deleteEmployee/{empid}", produces = "application/json; charset=UTF-8")
 	public ResponseEntity<EmployeeResponse> deleteEmployee(@PathVariable int empid) throws Exception{
 		EmployeeResponse response = new EmployeeResponse();
 		response.setStatusCode(HttpStatus.OK.value());
